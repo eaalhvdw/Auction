@@ -1,0 +1,39 @@
+﻿@model AuctionWebApp.Models.SalesSupplyViewModel
+
+@{
+    ViewBag.Title = "Forside";
+}
+
+<style>
+    .listBox {
+        min-width: 100%;
+        font-size: 20px;
+        align-content: center;
+    }
+</style>
+
+<h1><b>Auktionshuset for ædelmetaller</b></h1>
+<hr />
+
+<h3>
+    @Html.LabelFor(model => model.SalesSupplies)
+</h3>
+<br />
+@{ 
+    int _size = 0;
+    foreach (var i in Model.SalesSupplySelectList.Items)
+    {
+        _size++;
+    }
+    if (_size > 10)
+    {
+        _size = 10;
+    }
+}
+
+@Html.ListBoxFor(model => model.SelectedSalesSupplies, Model.SalesSupplySelectList, htmlAttributes: new { @class = "listBox", size = _size, disabled = "disabled"})
+<br />
+<br />
+<input type="button" value="Opret Salgsudbud" onclick="location.href='@Url.Action("CreateSalesSupply")'" />
+<input type="button" value="Log ud" onclick="location.href='@Url.Action("Login", "Login")'" />
+<br />

@@ -1,0 +1,140 @@
+﻿<Window x:Class="AuctionDesktopApp.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Login" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="Grid" TargetType="{x:Type Grid}">
+            <Setter Property="Background" Value="LightGoldenrodYellow"/>
+        </Style>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="HeaderLabel" BasedOn="{StaticResource {x:Type Label}}" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="SmallerHeaderLabel" BasedOn="{StaticResource {x:Type Label}}" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0, 0, 0, 10"/>
+        </Style>
+        <Style x:Key="NormalLabel" BasedOn="{StaticResource {x:Type Label}}" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style x:Key="ErrorLabel" BasedOn="{StaticResource {x:Type Label}}" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextElement.Foreground" Value="Red"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="MinWidth" Value="180"/>
+            <Setter Property="MaxWidth" Value="180"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="Padding" Value="4, 0, 0, 2"/>
+            <Setter Property="Margin" Value="20, 5, 0, 5"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="PlaceholderTxtBox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+            <Setter Property="Block.Foreground" Value="gray"/>
+        </Style>
+        <Style x:Key="NormalTxtBox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+        </Style>
+        <Style x:Key="Button" TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="5, 0, 5, 2"/>
+            <Setter Property="Margin" Value="0, 5, 0, 0"/>
+        </Style>
+    </Window.Resources>
+    
+    <!-- Main Grid -->
+    <Grid Style="{StaticResource Grid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/> <!-- 0: Space -->
+            <ColumnDefinition Width="2*"/> <!-- 1: Content -->
+            <ColumnDefinition Width="*"/> <!-- 2: Space -->
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/> <!-- 0: Headline in a viewbox -->
+            <RowDefinition Height="4*"/> <!-- 1: Login grid in a viewbox -->
+            <RowDefinition Height="*"/> <!-- 2: Space -->
+        </Grid.RowDefinitions>
+
+        <!-- Headline in a ViewBox -->
+        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0">
+            <Label Style="{StaticResource HeaderLabel}">Auktionshuset for ædelmetaller</Label>
+        </Viewbox>
+
+        <!-- Login grid in a ViewBox -->
+        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/> <!-- 0: Labels -->
+                    <ColumnDefinition Width="auto"/> <!-- 1: Textboxes and login button -->
+                    <ColumnDefinition Width="auto"/> <!-- 2: Error labels -->
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/> <!-- 0: Prompt label -->
+                    <RowDefinition Height="0.5*"/> <!-- 1: Name -->
+                    <RowDefinition Height="0.5*"/> <!-- 2: Number -->
+                    <RowDefinition Height="0.5*"/> <!-- 3: Email -->
+                    <RowDefinition Height="0.5*"/> <!-- 4: Login button -->
+                </Grid.RowDefinitions>
+
+                <!-- Prompt Label -->
+                <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Style="{StaticResource SmallerHeaderLabel}">Udfyld kontaktoplysninger</Label>
+
+                <!-- Normal Labels -->
+                <Label Grid.Column="0" Grid.Row="1" Style="{StaticResource NormalLabel}">Navn:</Label>
+                <Label Grid.Column="0" Grid.Row="2" Style="{StaticResource NormalLabel}">Telefonnummer:</Label>
+                <Label Grid.Column="0" Grid.Row="3" Style="{StaticResource NormalLabel}">E-mailadresse:</Label>
+
+                <!-- Error Labels -->
+                <Label Name="nameErrorLabel"  Grid.Column="2" Grid.Row="1" Style="{StaticResource ErrorLabel}"></Label>
+                <Label Name="numberErrorLabel"  Grid.Column="2" Grid.Row="2" Style="{StaticResource ErrorLabel}"></Label>
+                <Label Name="emailErrorLabel"  Grid.Column="2" Grid.Row="3" Style="{StaticResource ErrorLabel}"></Label>
+
+                <!-- TextBoxes -->
+                <TextBox 
+                Name="TxtBoxUserName" 
+                Grid.Column="1"
+                Grid.Row="1"
+                Style="{StaticResource PlaceholderTxtBox}"
+                GotKeyboardFocus="TextBox_GotKeyboardFocus">
+                    Navn
+                </TextBox>
+                <TextBox 
+                Name="TxtBoxUserNumber" 
+                Grid.Column="1"
+                Grid.Row="2"
+                Style="{StaticResource PlaceholderTxtBox}"
+                GotKeyboardFocus="TextBox_GotKeyboardFocus">
+                    Telefonnummer
+                </TextBox>
+                <TextBox 
+                Name="TxtBoxUserEmail" 
+                Grid.Column="1"
+                Grid.Row="3"
+                Style="{StaticResource PlaceholderTxtBox}"
+                GotKeyboardFocus="TextBox_GotKeyboardFocus">
+                    E-mail
+                </TextBox>
+
+                <!-- Button -->
+                <Button Name="LoginButton" Grid.Column="1" Grid.Row="4" Style="{StaticResource Button}" Content="Log ind" Click="LoginButton_Click"/>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</Window>

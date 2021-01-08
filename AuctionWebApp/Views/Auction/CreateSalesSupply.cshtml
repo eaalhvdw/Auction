@@ -1,0 +1,54 @@
+﻿@model AuctionWebApp.Models.SalesSupplyViewModel
+
+@{
+    ViewBag.Title = "Opret Salgsudbud";
+}
+
+<h1>Auktionshuset for ædelmetaller</h1>
+<hr />
+
+<div>
+    @using (Html.BeginForm())
+    {
+        <h2>Opret et nyt Salgsudbud</h2>
+        <br />
+        @Html.LabelFor(model => model.MetalType)
+        <br />
+        @Html.EnumDropDownListFor(model => model.MetalType, "Vælg Metaltype")
+        <span style="color:red;">
+            @Html.ValidationMessageFor(model => model.MetalType)
+        </span>
+        <br />
+        <br />
+        @Html.LabelFor(model => model.MetalAmount)
+        <br />
+        @Html.EditorFor(model => model.MetalAmount)
+        <span style="color:red;">
+            @Html.ValidationMessageFor(model => model.MetalAmount)
+        </span>
+        <br />
+        <br />
+        @Html.LabelFor(model => model.DeadlineDate)
+        <span>:&emsp; &emsp; &emsp; &emsp;</span>
+        @Html.EditorFor(model => model.DeadlineDate)
+        <span style="color:red;">
+            @Html.ValidationMessageFor(model => model.DeadlineDate)
+        </span>
+        <br />
+        @Html.LabelFor(model => model.DeadlineTime)
+        <span>:&emsp; &emsp;</span>
+        @Html.EditorFor(model => model.DeadlineTime)
+        <span style="color:red;">
+            @Html.ValidationMessageFor(model => model.DeadlineTime)
+        </span>
+        <br />
+        <br />
+        <input type="submit" value="Opret Salgsudbud" />
+        <input type="button" value="Annuller" onclick="location.href='@Url.Action("Index")'" />
+        <br />
+    }
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
